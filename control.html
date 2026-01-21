@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>燈控台 (Firebase版)</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; background: #222; color: white; }
+        .btn { width: 120px; height: 120px; border-radius: 20px; border: 3px solid #fff; cursor: pointer; margin: 15px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>控制中心</h1>
+    <div id="controls">
+        <button class="btn" style="background: #FF0000;" onclick="changeColor('#FF0000')">紅色</button>
+        <button class="btn" style="background: #0000FF;" onclick="changeColor('#0000FF')">藍色</button>
+        <button class="btn" style="background: #FFFF00;" onclick="changeColor('#FFFF00')">黃色</button>
+        <button class="btn" style="background: #FF00FF;" onclick="changeColor('#FF00FF')">粉色</button>
+        <button class="btn" style="background: #000000; color: white;" onclick="changeColor('#000000')">全黑</button>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        // 將此處替換為你的 Firebase 配置
+        const firebaseConfig = {
+            apiKey: "AIzaSyCRiLrwj7nL2TYLNG3VCOa47S6WauT4L6I",
+			authDomain: "litetogether2026.firebaseapp.com",
+			databaseURL: "https://litetogether2026-default-rtdb.firebaseio.com",
+			projectId: "litetogether2026",
+			storageBucket: "litetogether2026.firebasestorage.app",
+			messagingSenderId: "188950718851",
+			appId: "1:188950718851:web:bf3513f747b65577fd2eb6",
+			measurementId: "G-YML678VV0W"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        window.changeColor = (color) => {
+            set(ref(db, 'concert/currentColor'), color);
+        };
+    </script>
+</body>
+</html>
